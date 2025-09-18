@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>USDC Campus Connect - Registration 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #1A237E; /* Deep Navy Blue */
+      --secondary-color: #5C6BC0; /* Lighter Indigo */
+      --accent-color: #E8EAF6; /* Light Lavender */
+      --text-dark: #212121;
+      --text-light: #616161;
+      --background-light: #F5F7FA;
+      --card-background: #FFFFFF;
+      --border-color: #D1D9E2;
+      --shadow-light: 0 10px 40px rgba(0, 0, 0, 0.1);
+      --error-color: #D32F2F;
+      --success-color: #2E7D32;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background-color: var(--background-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 0;
+    }
+
+    .container { max-width: 800px; width: 100%; margin: 0 auto; padding: 20px; }
+    .card {
+      background: var(--card-background);
+      border-radius: 16px;
+      box-shadow: var(--shadow-light);
+      border: 1px solid var(--border-color);
+      padding: 50px;
+      position: relative;
+    }
+    .company-logo { display: block; max-height: 80px; margin: 0 auto 30px auto; }
+    h1 { font-size: 26px; margin-bottom: 20px; color: var(--primary-color); font-weight: 700; text-align: center; }
+    p { font-size: 16px; color: var(--text-dark); margin-bottom: 20px; text-align: left; }
+    ul { list-style-type: none; padding-left: 0; margin: 20px 0 25px 0; }
+    ul li { position: relative; padding-left: 35px; margin-bottom: 15px; color: var(--text-dark); font-size: 15px; line-height: 1.6; }
+    ul li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; top: 4px; color: var(--secondary-color); font-size: 20px; }
+    .section { display: none; animation: fadeIn 0.6s ease; }
+    .active { display: block; }
+    label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--primary-color); }
+    .input-wrapper { position: relative; margin-bottom: 20px; }
+    .input-wrapper i { position: absolute; left: 15px; top: 70%; transform: translateY(-50%); color: var(--text-light); transition: color 0.3s; }
+    input[type="text"], input[type="date"], input[type="number"], input[type="tel"], select, textarea, input[type="file"] {
+      width: 100%;
+      padding: 12px 15px 12px 45px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 15px;
+      background-color: #FDFDFD;
+      transition: all 0.3s;
+      box-sizing: border-box;
+      color: var(--text-dark);
+      font-family: 'Inter', sans-serif;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    input[type="file"]{ padding: 10px 15px 10px 45px; }
+    input[type="date"]{ padding-right: 15px; }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(92, 107, 192, 0.2);
+    }
+    input:focus ~ i, select:focus ~ i { color: var(--secondary-color); }
+    textarea { min-height: 120px; resize: vertical; padding: 15px; }
+    .full { grid-column: 1 / -1; }
+    .actions { display: flex; justify-content: space-between; margin-top: 30px; grid-column: 1 / -1; }
+    button { padding: 12px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+    button:disabled { background-color: var(--text-light); cursor: not-allowed; }
+    button.primary { background: var(--primary-color); color: #fff; }
+    button.primary:hover:not(:disabled) { background: var(--secondary-color); box-shadow: 0 6px 20px rgba(0,0,0,0.15); transform: translateY(-3px); }
+    button.secondary { background: var(--accent-color); color: var(--primary-color); }
+    button.secondary:hover { background: #D1D9E2; }
+    #result { text-align: center; padding: 40px 20px; }
+    #result h3 { font-size: 24px; color: var(--primary-color); margin-bottom: 15px; }
+    .progress-container { margin-bottom: 40px; }
+    .progress-steps { display: flex; justify-content: space-between; position: relative; margin-bottom: 10px; }
+    .progress-steps::before { content: ''; position: absolute; top: 50%; left: 0; transform: translateY(-50%); height: 4px; width: 100%; background-color: var(--border-color); z-index: 0; }
+    .progress-bar-fill { position: absolute; top: 50%; left: 0; transform: translateY(-50%); height: 4px; background-color: var(--secondary-color); z-index: 0; width: 0%; transition: width 0.4s ease; }
+    .step { width: 40px; height: 40px; background-color: #fff; border: 3px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.4s ease; font-weight: 600; color: var(--text-light); position: relative; z-index: 1; }
+    .step.active { border-color: var(--secondary-color); background-color: var(--secondary-color); color: #fff; }
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 0 25px; }
+    #form-error { color: var(--error-color); text-align: center; margin-top: 15px; display: none; font-weight: 500; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    @media(max-width:768px){ 
+      h1 { font-size: 22px; } 
+      form{ grid-template-columns:1fr; } 
+      .card { padding: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card" id="cardRoot">
+      <img src="https://i.postimg.cc/pTJQwfkV/USDC-Logo.png" alt="USDC Logo" class="company-logo">
+      
+      <div class="progress-container">
+        <div class="progress-steps">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+          <div class="step active" id="step1"><i class="fas fa-info"></i></div>
+          <div class="step" id="step2"><i class="fas fa-user"></i></div>
+          <div class="step" id="step3"><i class="fas fa-graduation-cap"></i></div>
+          <div class="step" id="step4"><i class="fas fa-file-alt"></i></div>
+        </div>
+      </div>
+
+      <!-- Section 1: Intro -->
+      <div class="section active" data-section="1">
+        <h1>USDC Campus Connect: Hiring Drive 2025</h1>
+        <p>We are actively seeking talented individuals for Admission Counsellor roles to empower students in shaping their academic and career paths.</p>
+        <p><strong>Role Overview:</strong> As an Admission Counsellor, you will provide personalized guidance to students, manage the entire admission lifecycle from initial application to successful enrollment, and assist them in making informed decisions about their future educational and career goals.</p>
+        <p><strong>Key Competencies Required:</strong></p>
+        <ul>
+            <li><strong>Communication Excellence:</strong> Proficient in both verbal and written communication, capable of articulating complex information clearly and persuasively.
+</li>
+            <li><strong>Analytical & Solution-Oriented Thinking:</strong> Strong ability to analyze situations, identify core issues, and develop practical, effective solutions.</li>
+            <li><strong>Relationship Building & Management:</strong> Skilled in fostering strong relationships with students and parents, coupled with efficient task management capabilities.</li>
+            <li><strong>Problem-Solving & Idea Conveyance:</strong> Aptitude for dissecting challenges, proposing viable solutions, and effectively conveying ideas and strategies.</li>
+        </ul>
+        <p>Seize this opportunity to advance your career with a leading and rapidly expanding education company. Join our team and play a pivotal role in building brighter futures for countless students.</p>
+        <div class="actions" style="justify-content: flex-end;">
+          <button type="button" class="primary" id="getStartedBtn">Get Started <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+      
+      <!-- Section 2: Personal Details -->
+      <form id="personalDetailsForm" class="section" data-section="2">
+        <div class="input-wrapper full">
+          <label for="regNo">University Registration No *</label>
+          <input id="regNo" name="registration_no" type="text" required placeholder="e.g., UDC123456" />
+          <i class="fas fa-id-card"></i>
+        </div>
+        <div class="input-wrapper full">
+          <label for="fullName">Full Name *</label>
+          <input id="fullName" name="full_name" type="text" required placeholder="e.g., John Doe" />
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="input-wrapper">
+          <label for="dob">Date of Birth *</label>
+          <input id="dob" name="dob" type="date" required />
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <div class="input-wrapper">
+            <label for="gender">Gender *</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <i class="fas fa-venus-mars"></i>
+        </div>
+        <div class="input-wrapper full">
+          <label for="aadhar">Aadhar No *</label>
+          <!-- === MODIFIED LINE === -->
+          <input id="aadhar" name="aadhar" type="tel" required placeholder="12-digit number" maxlength="12" pattern="[0-9]{12}" title="Aadhar number must be 12 digits." oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+          <i class="fas fa-address-card"></i>
+        </div>
+        <div class="actions">
+          <button type="button" class="secondary" data-action="prev">
+            <i class="fas fa-arrow-left"></i> Back
+          </button>
+          <button type="button" class="primary" data-action="next" data-form="personalDetailsForm">
+            Next <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </form>
+
+      <!-- Section 3: Education & Preferences -->
+      <form id="educationPreferencesForm" class="section" data-section="3">
+         <div class="input-wrapper full">
+            <label for="qualification">Highest Qualification *</label>
+            <select id="qualification" name="highest_qualification" required>
+                <option value="">Select Qualification</option>
+                <option value="Bachelor's">Bachelor's Degree</option>
+                <option value="Master's">Master's Degree</option>
+                <option value="PhD">PhD</option>
+            </select>
+            <i class="fas fa-graduation-cap"></i>
+         </div>
+         <div class="input-wrapper full">
+            <label for="uniName">University/College Name *</label>
+            <input id="uniName" name="university_name" type="text" required placeholder="e.g., Delhi University" />
+            <i class="fas fa-university"></i>
+         </div>
+         <div class="input-wrapper">
+            <label for="gradYear">Graduation Year *</label>
+            <select id="gradYear" name="graduation_year" required>
+              <option value="">Select Year</option>
+            </select>
+            <i class="fas fa-calendar-check"></i>
+         </div>
+         <div class="input-wrapper">
+            <label for="prefLocation">Preferred Location *</label>
+            <select id="prefLocation" name="preferred_location" required>
+                <option value="">Select Location</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Bangalore">Bangalore</option>
+            </select>
+            <i class="fas fa-map-marker-alt"></i>
+         </div>
+         <div class="actions">
+            <button type="button" class="secondary" data-action="prev">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <button type="button" class="primary" data-action="next" data-form="educationPreferencesForm">
+                Next <i class="fas fa-arrow-right"></i>
+            </button>
+         </div>
+      </form>
+
+      <!-- Section 4: Resume & Submit -->
+      <form id="resumeSubmitForm" class="section" data-section="4">
+        <div class="input-wrapper full">
+          <label for="whySales">Why are you interested in a Sales role? *</label>
+          <textarea id="whySales" name="why_sales" required placeholder="Explain your interest in a sales-oriented counselling role..."></textarea>
+        </div>
+        <div class="input-wrapper full">
+          <label for="resume">Upload Resume (PDF/DOC/DOCX) *</label>
+          <input id="resume" name="resume" type="file" required accept=".pdf,.doc,.docx" />
+          <i class="fas fa-file-upload"></i>
+        </div>
+        <div class="actions">
+            <button type="button" class="secondary" data-action="prev">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <button type="submit" class="primary">
+                Submit Application <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+        <div id="form-error"></div>
+      </form>
+      
+      <div id="result" style="display:none"></div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 4;
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxNVxz0NgiDSbvInr6bwMUmy3jrVEFKgY6mEGfNHzJ7v5pcv8lRKyc7SaUcqZrK1nbn/exec";
+
+    function populateGraduationYears() {
+        const select = document.getElementById('gradYear');
+        const currentYear = new Date().getFullYear() + 1;
+        while (select.options.length > 1) select.remove(1);
+        for (let i = 0; i <= 60; i++) {
+            const year = currentYear - i;
+            const opt = document.createElement('option');
+            opt.value = String(year);
+            opt.textContent = String(year);
+            select.appendChild(opt);
+        }
+    }
+
+    function updateProgressBar() {
+        const progressFill = document.getElementById('progressBarFill');
+        const steps = document.querySelectorAll('.step');
+        const percentage = ((currentStep - 1) / (totalSteps -1)) * 100;
+        progressFill.style.width = `${percentage}%`;
+        steps.forEach((step, index) => step.classList.toggle('active', index < currentStep));
+    }
+
+    function showStep(step) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      const activeSection = document.querySelector(`[data-section="${step}"]`);
+      if (activeSection) activeSection.classList.add('active');
+      updateProgressBar();
+    }
+
+    function validateCurrentSection(formId) {
+        let firstInvalidField = null;
+        const form = document.getElementById(formId);
+        if (!form) return false;
+        
+        form.querySelectorAll('[required], [pattern]').forEach(input => {
+            const parentWrapper = input.closest('.input-wrapper, .full');
+            const label = parentWrapper ? parentWrapper.querySelector('label') : null;
+            if (label) label.style.color = 'var(--primary-color)';
+            input.style.borderColor = 'var(--border-color)';
+            if (!input.checkValidity()) {
+                input.style.borderColor = 'var(--error-color)';
+                if (label) label.style.color = 'var(--error-color)';
+                if (!firstInvalidField) firstInvalidField = input;
+            }
+        });
+        if (firstInvalidField) {
+            firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return false;
+        }
+        return true;
+    }
+
+    function nextSection(){ if(currentStep < totalSteps){ currentStep++; showStep(currentStep); } }
+    function prevSection(){ if(currentStep > 1){ currentStep--; showStep(currentStep); } }
+
+    function showThankYou(resumeUrl) {
+      const card = document.getElementById('cardRoot');
+      card.innerHTML = `
+        <div id="result">
+          <img src="https://i.postimg.cc/pTJQwfkV/USDC-Logo.png" alt="USDC Logo" class="company-logo" style="margin-bottom: 20px;">
+          <h3>Application Submitted Successfully!</h3>
+          <p>Thank you for your interest. Your application has been received and is being reviewed by our team.</p>
+          ${resumeUrl ? `<p>A copy of your submission can be viewed here: <a href="${resumeUrl}" target="_blank" rel="noopener">Uploaded Resume</a></p>` : ''}
+          <p>You may now close this window.</p>
+        </div>
+      `;
+    }
+    
+    function showSubmitError(message) {
+        const errorDiv = document.getElementById('form-error');
+        errorDiv.textContent = `An error occurred: ${message}. Please try again.`;
+        errorDiv.style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showStep(currentStep);
+        populateGraduationYears();
+
+        document.getElementById('getStartedBtn').addEventListener('click', nextSection);
+        document.querySelectorAll('button[data-action]').forEach(button => {
+            button.addEventListener('click', () => {
+                const action = button.getAttribute('data-action');
+                if (action === 'next') {
+                    const formId = button.getAttribute('data-form');
+                    if (validateCurrentSection(formId)) nextSection();
+                } else if (action === 'prev') {
+                    prevSection();
+                }
+            });
+        });
+        
+        document.getElementById('resumeSubmitForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            if (!validateCurrentSection('resumeSubmitForm')) return;
+            
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            const errorDiv = document.getElementById('form-error');
+            errorDiv.style.display = 'none';
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting…';
+
+            const resumeFile = document.getElementById('resume').files[0];
+            const reader = new FileReader();
+
+            reader.onloadend = function() {
+                const data = {
+                    registration_no: document.getElementById('regNo').value,
+                    full_name: document.getElementById('fullName').value,
+                    dob: document.getElementById('dob').value,
+                    gender: document.getElementById('gender').value,
+                    aadhar: document.getElementById('aadhar').value,
+                    highest_qualification: document.getElementById('qualification').value,
+                    university_name: document.getElementById('uniName').value,
+                    graduation_year: document.getElementById('gradYear').value,
+                    preferred_location: document.getElementById('prefLocation').value,
+                    why_sales: document.getElementById('whySales').value,
+                    resume: reader.result,
+                    resume_fileName: resumeFile.name,
+                    resume_contentType: resumeFile.type
+                };
+
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(res => {
+                    if (res.status === 'success') {
+                        showThankYou(res.resumeUrl);
+                    } else {
+                        showSubmitError(res.message);
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = 'Submit Application <i class="fas fa-paper-plane"></i>';
+                    }
+                })
+                .catch(error => {
+                    showSubmitError(error.message);
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Submit Application <i class="fas fa-paper-plane"></i>';
+                });
+            };
+            reader.readAsDataURL(resumeFile);
+        });
+    });
+  </script>
+</body>
+</html>
